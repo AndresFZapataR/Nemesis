@@ -1,0 +1,83 @@
+CLASS MinHeap
+BEGIN
+ PRIVATE:
+	int count
+	array<Tree> arr
+	percolateDown()
+ PUBLIC:
+	MinHeap(array<Tree> ls)
+	insert()
+	deleteMin()
+	size()
+END
+
+FUNCION MinHeap:
+INPUT: array<Tree> ls
+OUTPUT: MinHeap
+USAGE: MinHeap heap(array<Tree> ls)
+
+BEGIN
+	FOR i: ls.size():
+		insert(ls[i])
+	
+END
+
+FUNCION percolateDown:
+INPUT: int index
+OUTPUT: void
+USAGE: percolateDown(index)
+BEGIN
+	IF index*2 > count OR hole*2+1 > count:
+		arr[index] = vec[count];
+		count--
+	END
+	ELSE:
+		index = index*2
+		IF arr[index].frec < arr[index+1].frec:
+			arr[index/2] = arr[index]
+			percolateDown(index)
+		END
+		ELSE
+			arr[index/2] = arr[index + 1]
+			percolateDown(index + 1)
+		END
+	END
+END
+
+FUNCION deleteMin:
+INPUT: void
+OUTPUT: BinaryTree
+USAGE: deleteMin()
+BEGIN
+	BinaryTree t = arr[1]
+	percolateDown(1)
+	return t
+END
+
+FUNCION insert:
+INPUT:BinaryTree t
+OUTPUT:void
+USAGE:insert(BinaryTree t)
+BEGIN
+	IF count == 0:
+		arr[1] = t
+	ELSE:
+		hole = count + 1
+		parent = hole/2
+		WHILE(t.frec < arr[parent].frec and parent != 0):
+			arr[hole] = arr[parent]
+			hole = parent
+			parent = parent/2
+		END
+		arr[hole] = t;	
+	END
+	count++
+END
+
+FUNCION	size: 
+INPUT: void
+OUTPUT: int
+USAGE: size()
+BEGIN
+	return count
+END

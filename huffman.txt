@@ -7,7 +7,7 @@ BEGIN
 	WHILE (heap.size() != 1)
 			t1 = heap.deleteMin()
 			t2 = heap.deleteMin()
-			heap.insert(t(t1,t2))
+			heap.insert(tree(t1,t2))
 		END
 	return heap.findMin()
 END
